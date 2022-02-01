@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/car")
 public class CarController {
     private static final Log LOG = LogFactory.getLog(CarController.class);
+
     @Autowired
     private CarSimpleService carSimpleService;
 

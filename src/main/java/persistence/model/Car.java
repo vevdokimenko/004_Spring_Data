@@ -5,10 +5,10 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Entity
-@Table(name = "cars_info", schema = "cars")
 @Getter
 @Setter
+@Entity
+@Table(name = "cars_info", schema = "cars")
 public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

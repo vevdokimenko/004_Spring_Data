@@ -1,12 +1,14 @@
 package persistence.dao.services.impl;
 
 import com.google.common.collect.Lists;
+import org.springframework.stereotype.Service;
 import persistence.dao.repositories.CarRepository;
 import persistence.dao.services.interfaces.CarSimpleService;
 import persistence.model.Car;
 
 import java.util.List;
 
+@Service
 public class CarSimpleServiceImpl implements CarSimpleService {
     private CarRepository carRepository;
 
