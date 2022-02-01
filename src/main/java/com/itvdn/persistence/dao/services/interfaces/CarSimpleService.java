@@ -1,6 +1,6 @@
-package persistence.dao.services.interfaces;
+package com.itvdn.persistence.dao.services.interfaces;
 
-import persistence.model.Car;
+import com.itvdn.persistence.model.Car;
 
 import java.util.List;
 

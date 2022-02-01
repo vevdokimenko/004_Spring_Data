@@ -1,0 +1,17 @@
+@import "base";
+
+.app{
+  display: flex;
+  align-content: center;
+  justify-content: center;
+  position: relative;
+  &_start{
+    &_container{
+      width:50%;
+      margin-top: 40px;
+    }
+  }
+}
+
+@import "list";
+@import "form";

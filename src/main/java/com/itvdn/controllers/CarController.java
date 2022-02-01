@@ -1,4 +1,4 @@
-package controllers;
+package com.itvdn.controllers;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-import persistence.dao.services.interfaces.CarSimpleService;
-import persistence.model.Car;
+import com.itvdn.persistence.dao.services.interfaces.CarSimpleService;
+import com.itvdn.persistence.model.Car;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,7 +18,6 @@ public class CarController {
 
     @Autowired
     private CarSimpleService carSimpleService;
-
 
     @PostMapping(value = "/add")
     public String addNewEmployee(HttpServletRequest request) {
@@ -33,10 +32,10 @@ public class CarController {
         return "redirect:/cars/all";
     }
 
-    @GetMapping(value = "/all")
+    @GetMapping
     public ModelAndView listAllCars(ModelAndView modelAndView) throws InterruptedException {
         modelAndView.addObject("cars", carSimpleService.findAll());
-        modelAndView.setViewName("/cars/all");
+        modelAndView.setViewName("views/car/index");
         return modelAndView;
     }
 

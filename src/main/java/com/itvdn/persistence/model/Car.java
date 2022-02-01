@@ -1,4 +1,4 @@
-package persistence.model;
+package com.itvdn.persistence.model;
 
 import lombok.Getter;
 import lombok.Setter;
