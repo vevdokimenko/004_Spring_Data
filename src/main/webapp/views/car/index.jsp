@@ -4,6 +4,7 @@
 <head>
     <title>Index</title>
     <link rel="stylesheet" href="css/App.css">
+    <script type="text/javascript" src="js/app.js"></script>
 </head>
 <body>
 <a href="/">&larr; Go back</a>
@@ -17,6 +18,33 @@
                     [V ${car.engine} - ${car.speed} km/h] ($${car.price})
                 </div>
             </c:forEach>
+        </div>
+        <div class="form" id="formAdd">
+            <div class="close">&#215;</div>
+            <h2>Add new car</h2>
+            <form action="">
+                <div class="form-row">
+                    <jsp:include page="../modules/input.jsp">
+                        <jsp:param name="label" value="Subject"/>
+                        <jsp:param name="placeholder" value="Your subject"/>
+                    </jsp:include>
+                    <jsp:include page="../modules/input.jsp">
+                        <jsp:param name="label" value="Some label"/>
+                        <jsp:param name="placeholder" value="Your some value"/>
+                    </jsp:include>
+                </div>
+                <div class="form-row">
+                    <jsp:include page="../modules/input.jsp">
+                        <jsp:param name="label" value="E-mail"/>
+                        <jsp:param name="placeholder" value="Type your email"/>
+                    </jsp:include>
+                </div>
+                <div class="form-row">
+                    <jsp:include page="../modules/button.jsp">
+                        <jsp:param name="text" value="Search by..."/>
+                    </jsp:include>
+                </div>
+            </form>
         </div>
     </div>
 </div>
