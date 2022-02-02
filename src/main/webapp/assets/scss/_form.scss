@@ -1,28 +1,37 @@
-.form{
+.form {
   padding: 2em;
   background: #fff;
-  box-shadow: 0 0px 20px 0 rgb(0 0 0 / 20%);
+  box-shadow: 0 0 20px 0 rgb(0 0 0 / 20%);
   position: absolute;
   top: 50vh;
   left: 50vw;
   transform: translate(-50%, -50%);
+  visibility: hidden;
+  opacity: 0;
+  transition: all .3s;
 
-  &-row{
+  &-row {
     display: flex;
-    margin-bottom: 1em;
-    &:last-child{
+    margin-bottom: 2em;
+
+    &:last-child {
       padding-top: 1em;
       margin-bottom: 0;
     }
   }
 }
 
-.form h2{
+.active {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+.form h2 {
   text-align: center;
   margin-bottom: 1.5em;
 }
 
-.btn{
+.btn {
   background: #4d80e4;
   color: #fff;
   cursor: pointer;
@@ -30,20 +39,23 @@
   height: 45px;
   border-radius: 30px;
   padding: 0.5em 2em;
+  line-height: 1em;
+  align-items: center;
+  display: flex;
 
-  &:hover{
-    background: #5585e5;
+  &:hover {
+    background: #5f8ce8;
   }
 
-  &-container{
+  &-container {
     width: 100%;
     display: flex;
     justify-content: center;
   }
 }
 
-.input{
-  &-container{
+.input {
+  &-container {
     display: flex;
     position: relative;
     flex-direction: column;
@@ -51,42 +63,54 @@
     width: 100%;
   }
 
-  &-label{
+  &-label {
     color: #b3b3b3;
     line-height: 1.5;
     margin-bottom: 10px;
     padding: 0 0.75em;
   }
 
-  &-field{
+  &-field {
     width: 100%;
     border-bottom: 1px solid #ccc;
     line-height: 1.5;
     color: #495057;
     padding: 0.375em 0.75em;
-    &:focus{
+
+    &:focus {
       border-bottom: 1px solid #000;
     }
   }
 }
 
-.close{
+.close {
   position: absolute;
   top: 0;
   right: 0;
-  width: 40px;
-  height: 40px;
+  width: 30px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 3em;
+  font-size: 2.5em;
   font-weight: bold;
   padding-bottom: 4px;
   color: #fff;
   background-color: #7c7c7c;
   cursor: pointer;
 
-  &:hover{
-    background-color: #656565;
+  &:hover {
+    background-color: red;
   }
+}
+
+.dark {
+  width: 100vw;
+  height: 100vh;
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.8);
+  visibility: hidden;
+  opacity: 0;
 }

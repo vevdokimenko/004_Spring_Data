@@ -1,9 +1,4 @@
-const closeBtn = document.querySelector(".close");
-closeBtn.addEventListener("click", () => {
-    switchFormVisibility();
-});
-
-const switchFormVisibility = () => {
-    const form = document.querySelector(".form");
-    alert(form.getAttributeNames());
+const switchFormVisibility = (id) => {
+    document.querySelector(id).classList.toggle("active");
+    document.querySelector('.dark').classList.toggle("active");
 }

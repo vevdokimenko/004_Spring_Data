@@ -19,8 +19,15 @@ public class CarController {
     @Autowired
     private CarSimpleService carSimpleService;
 
+    @GetMapping
+    public ModelAndView listAllCars(ModelAndView modelAndView) throws InterruptedException {
+        modelAndView.addObject("cars", carSimpleService.findAll());
+        modelAndView.setViewName("views/car/index");
+        return modelAndView;
+    }
+
     @PostMapping(value = "/add")
-    public String addNewEmployee(HttpServletRequest request) {
+    public String addNewCar(HttpServletRequest request) {
         Car car = new Car();
         car.setModel(request.getParameter("model"));
         car.setMark(request.getParameter("mark"));
@@ -29,43 +36,40 @@ public class CarController {
         car.setSpeed(Integer.parseInt(request.getParameter("speed")));
         LOG.info("New car with id " + carSimpleService.addCar(car).getId()
                 + " was added.");
-        return "redirect:/cars/all";
+        return "redirect:/car";
     }
 
-    @GetMapping
-    public ModelAndView listAllCars(ModelAndView modelAndView) throws InterruptedException {
-        modelAndView.addObject("cars", carSimpleService.findAll());
-        modelAndView.setViewName("views/car/index");
-        return modelAndView;
+    @PostMapping(value = "/remove")
+    public String deleteCar(HttpServletRequest request) {
+        carSimpleService.removeById(Long.parseLong(request.getParameter("id")));
+        LOG.info("Car with " + request.getParameter("id") + " was removed");
+        return "redirect:/car";
     }
 
-    @GetMapping(value = "/remove/{id}")
-    public ModelAndView deleteCar(@PathVariable long id, ModelAndView modelAndView) throws InterruptedException {
-        carSimpleService.removeById(id);
-        modelAndView.addObject("cars", carSimpleService.findAll());
-        modelAndView.setViewName("redirect:/cars/all");
-        return modelAndView;
-    }
-
-    @PostMapping(value = "/findByMark")
+    @GetMapping(value = "/findByMark")
     public ModelAndView findCarByMark(@RequestParam("mark") String mark, ModelAndView modelAndView) {
 
         modelAndView.addObject("cars", carSimpleService.findCarByMark(mark));
 
-        modelAndView.setViewName("/cars/search-results");
+        modelAndView.setViewName("/views/car/search-results");
         return modelAndView;
     }
 
-    @PostMapping(value = "/findByMarkAndModelAndSpeed")
+    @GetMapping(value = "/findByMarkAndModelAndSpeed")
     public ModelAndView findByMarkAndModelAndSpeed(@RequestParam("mark") String mark,
-                                                      @RequestParam("model") String model,
-                                                      @RequestParam("speed") int speed,
-                                                      ModelAndView modelAndView) {
+                                                   @RequestParam("model") String model,
+                                                   @RequestParam("speed") int speed,
+                                                   ModelAndView modelAndView) {
         modelAndView.addObject("cars", carSimpleService.findCarByMarkAndModelAndSpeed(
                 mark, model, speed
         ));
-        modelAndView.setViewName("/cars/search-results");
+        modelAndView.setViewName("/views/car/search-results");
         return modelAndView;
     }
 
+    @GetMapping(value = "/deleteAllAudi")
+    public String deleteAllAudi(){
+        carSimpleService.deleteAllByMark("Audi");
+        return "redirect:/car";
+    }
 }

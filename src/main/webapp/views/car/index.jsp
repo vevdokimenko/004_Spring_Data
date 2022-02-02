@@ -2,14 +2,15 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <html>
 <head>
-    <title>Index</title>
-    <link rel="stylesheet" href="css/App.css">
-    <script type="text/javascript" src="js/app.js"></script>
+    <title>Cars service</title>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/App.css">
 </head>
 <body>
-<a href="/">&larr; Go back</a>
-<div class="app">
-    <div class="app_start_container">
+
+<jsp:include page="../modules/topMenu.jsp"/>
+
+<div class="section">
+    <div class="section_container">
         <h1>List of cars:</h1>
         <div class="list_container">
             <c:forEach items="${cars}" var="car">
@@ -19,34 +20,20 @@
                 </div>
             </c:forEach>
         </div>
-        <div class="form" id="formAdd">
-            <div class="close">&#215;</div>
-            <h2>Add new car</h2>
-            <form action="">
-                <div class="form-row">
-                    <jsp:include page="../modules/input.jsp">
-                        <jsp:param name="label" value="Subject"/>
-                        <jsp:param name="placeholder" value="Your subject"/>
-                    </jsp:include>
-                    <jsp:include page="../modules/input.jsp">
-                        <jsp:param name="label" value="Some label"/>
-                        <jsp:param name="placeholder" value="Your some value"/>
-                    </jsp:include>
-                </div>
-                <div class="form-row">
-                    <jsp:include page="../modules/input.jsp">
-                        <jsp:param name="label" value="E-mail"/>
-                        <jsp:param name="placeholder" value="Type your email"/>
-                    </jsp:include>
-                </div>
-                <div class="form-row">
-                    <jsp:include page="../modules/button.jsp">
-                        <jsp:param name="text" value="Search by..."/>
-                    </jsp:include>
-                </div>
-            </form>
+        <jsp:include page="../modules/addCarForm.jsp"/>
+        <jsp:include page="../modules/removeCarById.jsp"/>
+        <jsp:include page="../modules/findCarByMark.jsp"/>
+        <jsp:include page="../modules/findByMarkModelSpeed.jsp"/>
+    </div>
+</div>
+<div class="section">
+    <div class="section-container">
+        <div class="btn-container">
+            <a href="/car/deleteAllAudi" class="btn">Delete all audi</a>
         </div>
     </div>
 </div>
+
+<script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>

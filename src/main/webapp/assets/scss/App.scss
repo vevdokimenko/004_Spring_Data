@@ -1,17 +1,43 @@
 @import "base";
 
-.app{
+.app {
   display: flex;
-  align-content: center;
+  align-items: center;
   justify-content: center;
-  position: relative;
-  &_start{
-    &_container{
-      width:50%;
-      margin-top: 40px;
-    }
+  width: 100vw;
+  height: 100vh;
+
+  &_container {
+    display: flex;
+    flex-direction: column;
   }
 }
 
+.app h1 {
+  margin-bottom: 2em;
+}
+
+.section {
+  padding: 1em 6em;
+}
+
+.top {
+  &-row {
+    display: flex;
+    justify-content: space-between;
+    height: 60px;
+    align-items: center;
+    background: #f1f1f1;
+    padding: 0 6em;
+  }
+}
+
+.top-row .btn:first-child {
+  background: #fff;
+  color: #4d80e4;
+  border: 2px solid #4d80e4;
+}
+
 @import "list";
+
 @import "form";

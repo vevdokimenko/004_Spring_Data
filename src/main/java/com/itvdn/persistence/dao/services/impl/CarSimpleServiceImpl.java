@@ -33,6 +33,11 @@ public class CarSimpleServiceImpl implements CarSimpleService {
         return carRepository.findCarByMarkAndModelAndSpeed(mark, model, speed);
     }
 
+    @Override
+    public void deleteAllByMark(String mark) {
+        carRepository.deleteAllByMark(mark);
+    }
+
     @Autowired
     public void setCarRepository(CarRepository carRepository) {
         this.carRepository = carRepository;

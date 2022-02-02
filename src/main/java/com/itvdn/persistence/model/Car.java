@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Objects;
 
 @Getter
 @Setter
@@ -13,7 +14,7 @@ public class Car {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private int id;
+    private long id;
 
     @Basic
     @Column(name = "mark")
@@ -58,23 +59,12 @@ public class Car {
         if (Double.compare(car.engine, engine) != 0) return false;
         if (price != car.price) return false;
         if (speed != car.speed) return false;
-        if (mark != null ? !mark.equals(car.mark) : car.mark != null) return false;
-        if (model != null ? !model.equals(car.model) : car.model != null) return false;
-
-        return true;
+        if (!Objects.equals(mark, car.mark)) return false;
+        return Objects.equals(model, car.model);
     }
 
     @Override
     public int hashCode() {
-        int result;
-        long temp;
-        result = id;
-        result = 31 * result + (mark != null ? mark.hashCode() : 0);
-        result = 31 * result + (model != null ? model.hashCode() : 0);
-        temp = Double.doubleToLongBits(engine);
-        result = 31 * result + (int) (temp ^ (temp >>> 32));
-        result = 31 * result + price;
-        result = 31 * result + speed;
-        return result;
+        return Objects.hash(id, mark, model, engine, price, speed);
     }
 }

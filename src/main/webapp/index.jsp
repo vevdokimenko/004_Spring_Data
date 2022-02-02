@@ -6,9 +6,11 @@
 </head>
 <body>
 <div class="app">
-    <div class="app_start_container">
-        <h1>Index page.</h1>
-        <a href="./car">Go to cars</a>
+    <div class="app_container">
+        <h1>Cars service</h1>
+        <div class="btn-container">
+            <a href="./car" class="btn">Go to cars</a>
+        </div>
     </div>
 </div>
 </body>
