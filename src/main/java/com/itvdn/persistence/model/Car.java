@@ -36,6 +36,17 @@ public class Car {
     @Column(name = "speed")
     private int speed;
 
+    public Car() {
+    }
+
+    public Car(String mark, String model, double engine, int price, int speed) {
+        this.mark = mark;
+        this.model = model;
+        this.engine = engine;
+        this.price = price;
+        this.speed = speed;
+    }
+
     @Override
     public String toString() {
         return "Car{" +

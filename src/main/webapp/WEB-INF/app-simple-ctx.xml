@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:jpa="http://www.springframework.org/schema/data/jpa"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+    <context:component-scan base-package="com.itvdn.*"/>
+
+    <tx:annotation-driven transaction-manager="txManager"/>
+
+    <jpa:repositories base-package="com.itvdn.persistence.dao.repositories"
+                      entity-manager-factory-ref="entityManagerFactory" transaction-manager-ref="txManager"/>
+
+
+    <bean id="entityManagerFactory" class="org.springframework.orm.jpa.LocalEntityManagerFactoryBean">
+        <property name="persistenceUnitName" value="item"/>
+    </bean>
+
+    <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
+        <property name="entityManagerFactory" ref="entityManagerFactory"/>
+    </bean>
+
+    <bean id="car1" class="com.itvdn.persistence.model.Car">
+        <property name="mark" value="Opel"/>
+        <property name="model" value="Astra"/>
+        <property name="engine" value="1.4"/>
+        <property name="price" value="5000"/>
+        <property name="speed" value="180"/>
+    </bean>
+
+    <bean id="car2" class="com.itvdn.persistence.model.Car">
+        <property name="mark" value="Audi"/>
+        <property name="model" value="A6"/>
+        <property name="engine" value="2.5"/>
+        <property name="price" value="10000"/>
+        <property name="speed" value="220"/>
+    </bean>
+
+    <bean id="car3" class="com.itvdn.persistence.model.Car">
+        <property name="mark" value="Audi"/>
+        <property name="model" value="A8"/>
+        <property name="engine" value="3.5"/>
+        <property name="price" value="20000"/>
+        <property name="speed" value="250"/>
+    </bean>
+
+    <bean id="car4" class="com.itvdn.persistence.model.Car">
+        <property name="mark" value="Nissan"/>
+        <property name="model" value="Almera"/>
+        <property name="engine" value="1.6"/>
+        <property name="price" value="7000"/>
+        <property name="speed" value="200"/>
+    </bean>
+
+</beans>
