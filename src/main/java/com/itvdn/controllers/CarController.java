@@ -3,6 +3,7 @@ package com.itvdn.controllers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.acls.model.NotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
@@ -68,8 +69,13 @@ public class CarController {
     }
 
     @GetMapping(value = "/deleteAllAudi")
-    public String deleteAllAudi(){
+    public String deleteAllAudi() {
         carSimpleService.deleteAllByMark("Audi");
         return "redirect:/car";
+    }
+
+    @GetMapping(value = "/404")
+    public void notFound() {
+        throw new NotFoundException("Not found");
     }
 }

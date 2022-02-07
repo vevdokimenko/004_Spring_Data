@@ -4,10 +4,11 @@
        xmlns:tx="http://www.springframework.org/schema/tx"
        xmlns="http://www.springframework.org/schema/beans"
        xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
        http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa.xsd
        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
-       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+       http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
 
     <context:component-scan base-package="com.itvdn.*"/>
 
@@ -24,4 +25,36 @@
     <bean id="txManager" class="org.springframework.orm.jpa.JpaTransactionManager">
         <property name="entityManagerFactory" ref="entityManagerFactory"/>
     </bean>
+
+    <!--    AOP-->
+    <bean id="myLogger" class="com.itvdn.aspects.MyLogger"/>
+    <bean id="securityAspect" class="com.itvdn.aspects.CheckAuthAspect"/>
+
+    <bean id="auth" class="com.itvdn.persistence.model.Auth" scope="session" lazy-init="false">
+        <property name="auth" value="false"/>
+    </bean>
+
+    <aop:config>
+        <aop:pointcut id="carPointCut"
+                      expression="execution(* com.itvdn.controllers.CarController.*(..))"/>
+
+        <aop:aspect ref="securityAspect" id="securityChecker">
+            <aop:before method="checkAuth"
+                        pointcut="execution(* com.itvdn.controllers.AuthController.*(..))
+                        &amp;&amp; !execution(* com.itvdn.controllers.AuthController.login(..))
+                        &amp;&amp; !execution(* com.itvdn.controllers.AuthController.logout(..))
+                        &amp;&amp; !execution(* com.itvdn.controllers.AuthController.hello(..))"/>
+        </aop:aspect>
+
+        <aop:aspect ref="myLogger" id="myAspect">
+            <aop:before method="beforeMethodInvocation" pointcut-ref="carPointCut"/>
+            <aop:after-returning
+                    method="afterMethodReturn"
+                    pointcut="execution(* com.itvdn.persistence.dao.repositories.CarRepository.*(..)) and args(result)"/>
+            <aop:after-throwing method="afterMethodException" throwing="e"
+                                pointcut="within(@org.springframework.web.bind.annotation.RequestMapping *)"/>
+        </aop:aspect>
+    </aop:config>
+
+    <!--    AOP-->
 </beans>
