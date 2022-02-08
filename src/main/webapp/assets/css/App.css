@@ -221,4 +221,15 @@ body {
   opacity: 0;
 }
 
+.user-info {
+  background: #85a8ef;
+  padding: 5px;
+  font-size: 0.8em;
+}
+
+.user-info p:first-child {
+  font-size: 1em;
+  color: darkblue;
+}
+
 /*# sourceMappingURL=App.css.map */

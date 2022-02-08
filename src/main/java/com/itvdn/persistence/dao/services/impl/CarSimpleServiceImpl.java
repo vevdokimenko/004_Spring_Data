@@ -2,6 +2,7 @@ package com.itvdn.persistence.dao.services.impl;
 
 import com.google.common.collect.Lists;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import com.itvdn.persistence.dao.repositories.CarRepository;
 import com.itvdn.persistence.dao.services.interfaces.CarSimpleService;
@@ -25,6 +26,7 @@ public class CarSimpleServiceImpl implements CarSimpleService {
         carRepository.deleteById(id);
     }
 
+    @PreAuthorize(value = "hasAuthority('ROLE_ADMIN')")
     public List<Car> findCarByMark(String mark) {
         return carRepository.findCarByMark(mark);
     }

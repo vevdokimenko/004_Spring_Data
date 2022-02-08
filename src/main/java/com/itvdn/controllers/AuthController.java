@@ -16,21 +16,21 @@ public class AuthController {
         this.context = context;
     }
 
-    @GetMapping(value = "login")
-    public ModelAndView login(ModelAndView modelAndView) {
-        Auth auth = context.getBean("auth", Auth.class);
-        auth.setAuth(true);
-        modelAndView.setViewName("views/auth/login");
-        return modelAndView;
-    }
+//    @GetMapping(value = "login")
+//    public ModelAndView login(ModelAndView modelAndView) {
+//        Auth auth = context.getBean("auth", Auth.class);
+//        auth.setAuth(true);
+//        modelAndView.setViewName("views/auth/login");
+//        return modelAndView;
+//    }
 
-    @GetMapping(value = "logout")
-    public ModelAndView logout(ModelAndView modelAndView) {
-        Auth auth = context.getBean("auth", Auth.class);
-        auth.setAuth(false);
-        modelAndView.setViewName("views/auth/logout");
-        return modelAndView;
-    }
+//    @GetMapping(value = "logout")
+//    public ModelAndView logout(ModelAndView modelAndView) {
+//        Auth auth = context.getBean("auth", Auth.class);
+//        auth.setAuth(false);
+//        modelAndView.setViewName("views/auth/logout");
+//        return modelAndView;
+//    }
 
     @GetMapping(value = "hello")
     public String hello() {
