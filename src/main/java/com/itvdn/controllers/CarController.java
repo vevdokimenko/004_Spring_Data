@@ -3,6 +3,8 @@ package com.itvdn.controllers;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.CacheManager;
+import org.springframework.cache.concurrent.ConcurrentMapCache;
 import org.springframework.security.acls.model.NotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -20,11 +22,22 @@ public class CarController {
     @Autowired
     private CarSimpleService carSimpleService;
 
+    @Autowired
+    private CacheManager cacheManager;
+
     @GetMapping
     public ModelAndView listAllCars(ModelAndView modelAndView) throws InterruptedException {
         modelAndView.addObject("cars", carSimpleService.findAll());
+        modelAndView.addObject("carsCache", cacheManager.getCache("cars").getNativeCache());
+        modelAndView.addObject("carCache", cacheManager.getCache("car").getNativeCache());
         modelAndView.setViewName("views/car/index");
         return modelAndView;
+    }
+
+    @GetMapping("/clearCache")
+    public String clearCache() {
+        carSimpleService.clearCache();
+        return "views/car/index";
     }
 
     @PostMapping(value = "/add")
@@ -51,7 +64,8 @@ public class CarController {
     public ModelAndView findCarByMark(@RequestParam("mark") String mark, ModelAndView modelAndView) {
 
         modelAndView.addObject("cars", carSimpleService.findCarByMark(mark));
-
+        modelAndView.addObject("carsCache", cacheManager.getCache("cars").getNativeCache());
+        modelAndView.addObject("carCache", cacheManager.getCache("car").getNativeCache());
         modelAndView.setViewName("/views/car/search-results");
         return modelAndView;
     }

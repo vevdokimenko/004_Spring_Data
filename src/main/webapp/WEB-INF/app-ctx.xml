@@ -54,9 +54,9 @@
 
         <aop:aspect ref="myLogger" id="myAspect">
             <aop:before method="beforeMethodInvocation" pointcut-ref="carPointCut"/>
-            <aop:after-returning
-                    method="afterMethodReturn"
-                    pointcut="execution(* com.itvdn.persistence.dao.repositories.CarRepository.*(..)) and args(result)"/>
+<!--            <aop:after-returning-->
+<!--                    method="afterMethodReturn"-->
+<!--                    pointcut="execution(* com.itvdn.persistence.dao.repositories.CarRepository.*(..)) and args(result)"/>-->
             <aop:after-throwing method="afterMethodException" throwing="e"
                                 pointcut="within(@org.springframework.web.bind.annotation.RequestMapping *)"/>
         </aop:aspect>
@@ -92,4 +92,16 @@
     </security:authentication-manager>
 
     <!--Security-->
+
+    <!--CACHE-->
+    <cache:annotation-driven />
+    <bean id="cacheManager" class="org.springframework.cache.support.SimpleCacheManager">
+        <property name="caches">
+            <set>
+                <bean id="cars" class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" />
+                <bean id="car" class="org.springframework.cache.concurrent.ConcurrentMapCacheFactoryBean" />
+            </set>
+        </property>
+    </bean>
+    <!--CACHE-->
 </beans>

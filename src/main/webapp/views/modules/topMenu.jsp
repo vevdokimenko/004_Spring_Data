@@ -9,6 +9,8 @@
         <sec:authorize access="hasAuthority('ROLE_ADMIN')">
             <p><sec:authentication property="details"/></p>
             <p><sec:authentication property="principal"/></p>
+            <p><b>Cache of cars: </b>${carsCache}</p>
+            <p><b>Cache of car: </b>${carCache}</p>
         </sec:authorize>
     </div>
     <div class="top-row">
