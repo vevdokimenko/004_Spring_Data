@@ -48,7 +48,7 @@ public class CarSimpleServiceImpl implements CarSimpleService {
         carRepository.deleteAllByMark(mark);
     }
 
-    @CacheEvict("cars")
+    @CacheEvict({"cars", "car"})
     @Override
     public void clearCache() {
         System.out.println("Cache cars cleared");
